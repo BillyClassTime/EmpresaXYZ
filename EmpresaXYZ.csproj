@@ -131,6 +131,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EmpresaXYZModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Databases\SetupEmpresaXYZDB.cmd" />
     <None Include="Data\EmpresaXYZModel.edmx.diagram">
       <DependentUpon>EmpresaXYZModel.edmx</DependentUpon>
     </None>
@@ -144,6 +145,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Databases\EmpresaXYZ.sql" />
     <Content Include="Data\EmpresaXYZModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EmpresaXYZModel.Context.cs</LastGenOutput>
