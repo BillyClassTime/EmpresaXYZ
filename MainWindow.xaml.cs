@@ -1,19 +1,10 @@
 ﻿using EmpresaXYZ.Data;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace EmpresaXYZ
 {
@@ -44,7 +35,7 @@ namespace EmpresaXYZ
 
         private void cbSucursales_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            sucursal = (Branch) cbSucursales.SelectedItem;
+            sucursal = (Branch)cbSucursales.SelectedItem;
             listaEmpleados = (from a in dBContext.Employees
                               where a.Branch == sucursal.BranchID
                               select a).ToList();
@@ -67,7 +58,7 @@ namespace EmpresaXYZ
             switch (e.Key)
             {
                 case Key.Enter:
-                    Employee empleado = (Employee) lvEmpleados.SelectedItem;
+                    var empleado = (Employee)lvEmpleados.SelectedItem;
                     EditarEmpleado(empleado);
                     break;
                 case Key.Insert:
@@ -84,7 +75,7 @@ namespace EmpresaXYZ
 
         private void BorrarEmpleado(Employee empleado)
         {
-            MessageBoxResult respuesta = MessageBox.Show(
+            var respuesta = MessageBox.Show(
           $"¿Borrar al empleado:{empleado.FirstName} {empleado.LastName}?",
           "Confirme", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (respuesta == MessageBoxResult.Yes)
@@ -97,13 +88,15 @@ namespace EmpresaXYZ
         }
         private void InsertarNuevoEmpleado()
         {
-            Empleados fEmp = new Empleados();
-            fEmp.Title =
-                $"Nuevo empleado para la sucursal:{sucursal.BranchName}";
+            var fEmp = new Empleados
+            {
+                Title =
+                $"Nuevo empleado para la sucursal:{sucursal.BranchName}"
+            };
             fEmp.Sucursal.Text = sucursal.BranchName;
             if (fEmp.ShowDialog().Value)
             {
-                Employee newEmp = new Employee
+                var newEmp = new Employee
                 {
                     EmployeeID = int.Parse(fEmp.ID.Text),
                     FirstName = fEmp.Nombre.Text,
@@ -161,10 +154,10 @@ namespace EmpresaXYZ
 
         private void SavarBD_Click(object sender, RoutedEventArgs e)
         {
-           /* try
-            {*/
-                dBContext.SaveChanges();
-                SavarBD.IsEnabled = false;
+            /* try
+             {*/
+            dBContext.SaveChanges();
+            SavarBD.IsEnabled = false;
             /*}
             catch (Exception ex)
             {
@@ -180,9 +173,10 @@ namespace EmpresaXYZ
 
         private void ImportarXML_Click(object sender, RoutedEventArgs e)
         {
-            Employee newEmp = new Employee();
+            var newEmp = new Employee();
             var filename = "EmpleadoXML_In.xml";
             var seria = new Serializar();
+            // New characteristich of out parameter declaration, example in proceso:
             var resultado = seria.Deserializando(filename, out newEmp, out bool proceso);
             if (proceso)
             {
@@ -195,7 +189,7 @@ namespace EmpresaXYZ
             }
             else
             {
-                MessageBox.Show(resultado, "No se ha insertado el empleado", 
+                MessageBox.Show(resultado, "No se ha insertado el empleado",
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
