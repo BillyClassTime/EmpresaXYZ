@@ -125,9 +125,10 @@ namespace EmpresaXYZ
 
         private void EditarEmpleado(Employee empleado)
         {
-            Empleados fEmp = new Empleados();
-            fEmp.Title = 
-         $"Editando el empleado:{empleado.FirstName} {empleado.LastName} ";
+            var fEmp = new Empleados
+            {
+                Title = $"Editando el empleado:{empleado.FirstName} {empleado.LastName} "
+            };
             fEmp.ID.Text = empleado.EmployeeID.ToString();
             fEmp.ID.IsEnabled = false;
             fEmp.Nombre.Text = empleado.FirstName;
@@ -154,7 +155,7 @@ namespace EmpresaXYZ
 
         private void lvEmpleados_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Employee empleado = (Employee)lvEmpleados.SelectedItem;
+            var empleado = (Employee)lvEmpleados.SelectedItem;
             EditarEmpleado(empleado);
         }
 
@@ -180,9 +181,9 @@ namespace EmpresaXYZ
         private void ImportarXML_Click(object sender, RoutedEventArgs e)
         {
             Employee newEmp = new Employee();
-            string filename = "EmpleadoXML_In.xml";
-            Serializar seria = new Serializar();
-            string resultado = seria.Deselizando(filename, out newEmp, out bool proceso);
+            var filename = "EmpleadoXML_In.xml";
+            var seria = new Serializar();
+            var resultado = seria.Deserializando(filename, out newEmp, out bool proceso);
             if (proceso)
             {
                 //Asignamos el empleado a la sucursal

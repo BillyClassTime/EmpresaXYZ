@@ -19,7 +19,7 @@ namespace EmpresaXYZ
             proceso = false;
             try
             {
-                EmployeeSD empleadoSD = new EmployeeSD
+                var empleadoSD = new EmployeeSD
                 {
                     EmployeeID = empleado.EmployeeID,
                     FirstName = empleado.FirstName,
@@ -30,7 +30,7 @@ namespace EmpresaXYZ
                 };
 
                 // Create an instance of the XmlSerializer class; specify the type of object to serialize.
-                XmlSerializer serializer = new XmlSerializer(typeof(EmployeeSD));
+                var serializer = new XmlSerializer(typeof(EmployeeSD));
 
                 writer = new StreamWriter(filename);
                 serializer.Serialize(writer, empleadoSD);
@@ -48,10 +48,10 @@ namespace EmpresaXYZ
             }
             return resultado;
         }
-        public string Deselizando(string filename, out Employee empleado,out bool proceso)
+        public string Deserializando(string filename, out Employee empleado,out bool proceso)
         {
             // Declare an object variable of the type to be deserialized.
-            EmployeeSD empleadoDS = new EmployeeSD();
+            var empleadoDS = new EmployeeSD();
             empleado = new Employee();
             proceso = false;
             FileStream fs = null;
@@ -59,11 +59,11 @@ namespace EmpresaXYZ
             {
                 // Create an instance of the XmlSerializer class;// specify the type of object
                 // to be deserialized.
-                XmlSerializer serializer = new XmlSerializer(typeof(EmployeeSD));
+                var serializer = new XmlSerializer(typeof(EmployeeSD));
 
                 /* If the XML document has been altered with unknown nodes or attributes,
                  handle them with the UnknownNode and UnknownAttribute events.*/
-                serializer.UnknownNode += new XmlNodeEventHandler(serializer_UnknownNode);
+                serializer.UnknownNode += new XmlNodeEventHandler(Serializer_UnknownNode);
                 serializer.UnknownAttribute += new
                 XmlAttributeEventHandler(serializer_UnknownAttribute);
 
@@ -96,15 +96,15 @@ namespace EmpresaXYZ
         }
 
 
-        private void serializer_UnknownNode(object sender, XmlNodeEventArgs e)
+        private void Serializer_UnknownNode(object sender, XmlNodeEventArgs e)
         {
-            resultado += String.Format(@"Unknown Node:{0} - {1}{2}", e.Name, e.Text, System.Environment.NewLine);
+            resultado += $@"Unknown Node:{e.Name} - {e.Text}{System.Environment.NewLine}";
         }
 
         private void serializer_UnknownAttribute(object sender, XmlAttributeEventArgs e)
         {
             System.Xml.XmlAttribute attr = e.Attr;
-            resultado += String.Format("Unknown attribute {0}='{1}{2}", attr.Name, attr.Value, System.Environment.NewLine);
+            resultado += $"Unknown attribute {attr.Name}='{attr.Value}{System.Environment.NewLine}";
         }
 
     }

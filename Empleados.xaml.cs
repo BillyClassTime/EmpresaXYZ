@@ -20,7 +20,7 @@ namespace EmpresaXYZ
     /// </summary>
     public partial class Empleados : Window
     {
-        public int SucursalId = 0;
+        public int SucursalId;
         public Empleados()
         {
             InitializeComponent();
@@ -38,7 +38,7 @@ namespace EmpresaXYZ
 
         private void ExportarXML_Click(object sender, RoutedEventArgs e)
         {
-            Employee newEmp = new Employee()
+            var newEmp = new Employee()
             {
                 EmployeeID = int.Parse(ID.Text),
                 FirstName = Nombre.Text,
@@ -50,15 +50,11 @@ namespace EmpresaXYZ
                 JobTitle = int.Parse(Cargo.Text),
                 Branch = SucursalId
             };
-            Serializar seria = new Serializar();
-            string filename = "EmpleadoXML_Out.xml";
-            string resultado = seria.Serializando(filename, newEmp, out bool proceso);
+            var seria = new Serializar();
+            var filename = "EmpleadoXML_Out.xml";
+            var resultado = seria.Serializando(filename, newEmp, out bool proceso);
 
-            if (proceso)
-
-                resultado = $"Llamada:{resultado}";
-            else
-                resultado = $"Error:{resultado}";
+            resultado = proceso ? $"Llamada:{resultado}" : $"Error:{resultado}";
             MessageBox.Show(resultado, "Mensaje de la exportación",
                     MessageBoxButton.OK, MessageBoxImage.Information);
 
