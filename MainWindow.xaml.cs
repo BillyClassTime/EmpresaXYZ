@@ -13,9 +13,9 @@ namespace EmpresaXYZ
     /// </summary>
     public partial class MainWindow : Window
     {
-        private EmpresaXYZEntities dBContext = null;
-        private Branch sucursal = null;
-        IList<Employee> listaEmpleados = null;
+        private EmpresaXYZEntities dBContext;
+        private Branch sucursal;
+        IList<Employee> listaEmpleados;
         public MainWindow()
         {
             InitializeComponent();

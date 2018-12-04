@@ -140,6 +140,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Report20181204-1229.diagsession" />
+    <None Include="Report20181204-1229.vsps" />
+    <None Include="Report20181204-1229.vspx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
