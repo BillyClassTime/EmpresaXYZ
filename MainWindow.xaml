@@ -1,0 +1,27 @@
+﻿<Window x:Class="EmpresaXYZ.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EmpresaXYZ"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="410.656" Width="689.121" Loaded="Window_Loaded">
+    <Grid >
+        <ComboBox x:Name="cbSucursales" HorizontalAlignment="Left" Height="43" Margin="100,30,0,0" VerticalAlignment="Top" Width="490" SelectionChanged="cbSucursales_SelectionChanged"/>
+        <ListView x:Name="lvEmpleados" HorizontalAlignment="Left" Height="148" Margin="96,117,0,0" VerticalAlignment="Top" Width="494" KeyDown="lvEmpleados_KeyDown" MouseDoubleClick="lvEmpleados_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding EmployeeID}" Header="ID" />
+                    <GridViewColumn DisplayMemberBinding="{Binding FirstName}" Header="Nombre" />
+                    <GridViewColumn DisplayMemberBinding="{Binding LastName}" Header="Apellido" />
+                    <GridViewColumn DisplayMemberBinding="{Binding DateOfBirth}" Header="Fecha" />
+                    <GridViewColumn DisplayMemberBinding="{Binding JobTitle}" Header="Cargo" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="SavarBD" Content="Salvar BBDD" HorizontalAlignment="Left" Height="46" Margin="99,310,0,0" VerticalAlignment="Top" Width="113" Click="SavarBD_Click" IsEnabled="False"/>
+        <Button x:Name="ImportarXML" Content="Importar a XML" HorizontalAlignment="Left" Height="46" Margin="234,310,0,0" VerticalAlignment="Top" Width="113" Click="ImportarXML_Click"/>
+        <Button x:Name="Salir" Content="Salir" HorizontalAlignment="Left" Height="46" Margin="477,310,0,0" VerticalAlignment="Top" Width="113" Click="Salir_Click"/>
+
+    </Grid>
+</Window>
